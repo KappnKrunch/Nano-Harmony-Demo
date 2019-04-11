@@ -1,49 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-    public GameObject particleTemplate;
-    public GameObject atomTemplate;
-    List<GameObject> particles = new  List<GameObject>();
-    List<GameObject> atoms = new List<GameObject>();
+    public float forceMutliplier = 1;
+
+    //lists of all the particles and what they are
+    public List<WeightsBiases> particles = new List<WeightsBiases>(); // set to private once finished debugging
 
 
-    void SpawnRandomParticles(int amount)
+    void CheckParticleUpdate()
     {
-        for (int i = 0; i < amount; i++)
+        //looks for any particles and sets the list to those particles
+        particles = FindObjectsOfType<WeightsBiases>().ToList();
+    }
+
+    void ApplyForceToParticles()
+    {
+        //this function goes through the particles list and uses the weights and biases to apply force to earch of the particles
+        //it doesn't know what type each paticle is but it doesn't matter. It only needs the weights and biases to apply force to the rigidbody
+
+        //every particle in the list
+        for (int i = 0; i < particles.Count; i++)
         {
-            RaycastHit hit;
-            if (Physics.Raycast( new Vector3(Random.Range(0, 100), 1000, Random.Range(0, 100)),Vector3.down, out hit, 1100) )
+            Rigidbody mainParticle = particles[i].GetComponent<Rigidbody>();
+            Vector3 howMuchItsPulled = Vector3.zero;
+
+            //is going to effect every other particle in the list
+            for (int j = 0; j < particles.Count; j++)
             {
-                GameObject newParticle = Instantiate(particleTemplate, hit.point, Quaternion.identity);
-                particles.Add(newParticle);
+                Rigidbody secondaryParticle = particles[i].GetComponent<Rigidbody>();
+                float distance = Vector3.Distance(mainParticle.position, secondaryParticle.position);
+
+                howMuchItsPulled += (secondaryParticle.position - mainParticle.position);
+
             }
+
+            mainParticle.AddForce(howMuchItsPulled); // the particle is pulled by howMuchItsPulled
+
         }
     }
 
-    void SpawnRandomAtoms(int amount) {
-        for (int i = 0; i < amount; i++) {
-            RaycastHit hit;
-            if (Physics.Raycast(new Vector3(Random.Range(0, 100), 1000, Random.Range(0, 100)), Vector3.down, out hit, 1100)) {
-                GameObject newAtom = Instantiate(particleTemplate, hit.point, Quaternion.identity);
-                atoms.Add(newAtom);
-            }
-        }
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       // SpawnRandomParticles(15);
-       // SpawnRandomAtoms(3);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
