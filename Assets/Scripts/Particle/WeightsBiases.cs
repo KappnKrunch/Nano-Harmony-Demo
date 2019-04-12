@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework.Constraints;
 using UnityEngine;
 
 [System.Serializable]
@@ -10,7 +9,7 @@ public class WeightsBiases : MonoBehaviour
     float[] bias = new float[3]; //(proton, neutron, electron) how strong the particle pulls on n type of particle; 1 is very strong; -1 pushes 
 
     public enum ParticleType { Proton, Neutron, Electron }
-    private ParticleType type = ParticleType.Proton;
+    public ParticleType type = ParticleType.Proton;
 
     private float maxDistance = 12;
 
@@ -23,7 +22,6 @@ public class WeightsBiases : MonoBehaviour
     {
 
     }
-
 
     public void SetWeight(float[] newWeight) {
         //if its greater or less than negative 1

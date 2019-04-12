@@ -67,6 +67,8 @@
     <Compile Include="Assets\Scripts\Particle\Particle.cs" />
     <Compile Include="Assets\Scripts\Particle\Proton.cs" />
     <Compile Include="Assets\Scripts\Particle\WeightsBiases.cs" />
+    <Compile Include="Assets\Scripts\Utils.cs" />
+    <None Include="Assets\Materials\Shader\Electron.shader" />
     <None Include="Assets\Materials\Shader\FloorShader.shader" />
     <None Include="Assets\Materials\Shader\UIShader.shader" />
     <None Include="Assets\Materials\Shader\SpookyTextShader.shader" />

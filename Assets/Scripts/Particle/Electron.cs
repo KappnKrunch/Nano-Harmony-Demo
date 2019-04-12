@@ -6,18 +6,20 @@ using UnityEngine;
 public class Electron : MonoBehaviour
 {
     private WeightsBiases weightsBiases;
-    Vector3 weight = new Vector3(0.1f, 0.1f, -0.3f); //(proton, neutron, electron)  how hard it is to pull n type of particle; 1 is the max weight and makes the particle very hard to pull; -1 will make the atom go towards it
-    Vector3 bias = new Vector3(0.1f, 0.1f, 0); //(proton, neutron, electron) how strong the particle pulls on n type of particle; 1 is very strong; -1 pushes away
+    float[] weight = new float[3] { 0.1f, 0.1f, -0.3f}; //(proton, neutron, electron)  how hard it is to pull n type of particle; 1 is the max weight and makes the particle very hard to pull; -1 will make the atom go towards it
+    float[] bias = new float[3] { 0.1f, 0.1f, 0}; //(proton, neutron, electron) how strong the particle pulls on n type of particle; 1 is very strong; -1 pushes away
 
-    void Init() 
+    void Init()
     {
+        weightsBiases = this.GetComponent<WeightsBiases>();
         weightsBiases.SetWeight(weight);
         weightsBiases.SetBias(bias);
+        weightsBiases.SetParticleType(WeightsBiases.ParticleType.Electron);
     }
 
     void Start() 
     {
-        weightsBiases = this.GetComponent<WeightsBiases>();
+        Init();
     }
 
 
