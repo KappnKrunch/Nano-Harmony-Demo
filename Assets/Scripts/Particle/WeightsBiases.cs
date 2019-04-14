@@ -11,7 +11,7 @@ public class WeightsBiases : MonoBehaviour
     public enum ParticleType { Proton, Neutron, Electron }
     public ParticleType type = ParticleType.Proton;
 
-    private float maxDistance = 12;
+    private float maxDistance = 3;
 
     public float GetMaxDistane()
     {

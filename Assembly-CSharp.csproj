@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Materials\Shader\RippleEffect.cs" />
     <Compile Include="Assets\Scripts\Floor.cs" />
     <Compile Include="Assets\Scripts\Particle\Atom.cs" />
     <Compile Include="Assets\Scripts\Particle\Electron.cs" />
@@ -69,7 +70,10 @@
     <Compile Include="Assets\Scripts\Particle\WeightsBiases.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
     <None Include="Assets\Materials\Shader\Electron.shader" />
+    <None Include="Assets\Materials\Shader\SphericalMask.shader" />
     <None Include="Assets\Materials\Shader\FloorShader.shader" />
+    <None Include="Assets\Materials\Shader\NewElectron.shader" />
+    <None Include="Assets\Materials\Shader\Ripple.shader" />
     <None Include="Assets\Materials\Shader\UIShader.shader" />
     <None Include="Assets\Materials\Shader\SpookyTextShader.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">

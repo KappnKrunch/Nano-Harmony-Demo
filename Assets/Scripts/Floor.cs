@@ -10,13 +10,16 @@ public class Floor : MonoBehaviour
 
     //lists of all the particles and what they are
     public List<WeightsBiases> particles = new List<WeightsBiases>(); // set to private once finished debugging
+    public List<Atom> atoms = new List<Atom>();
 
 
     void CheckParticleUpdate()
     {
         //looks for any particles and sets the list to those particles
+        particles.Clear();
         particles = FindObjectsOfType<WeightsBiases>().ToList();
-        
+        atoms = FindObjectsOfType<Atom>().ToList();
+
     }
 
     void ApplyForceToParticles()
@@ -67,7 +70,7 @@ public class Floor : MonoBehaviour
             //Debug.Log(mainParticleForce);
             mainParticleForce = ( mainParticleForce / forced) * forceMutliplier;
 
-            //mainParticle.AddForce( mainParticleForce); // how much the main particle is pulled / mow many particles there are
+            mainParticle.AddForce( mainParticleForce); // how much the main particle is pulled / mow many particles there are
 
         }
     }
@@ -79,7 +82,7 @@ public class Floor : MonoBehaviour
 
     void Update()
     {
-        Debug.Log((int) Time.time % updateSpeed == 0);
+        //Debug.Log((int) Time.time % updateSpeed == 0);
         if ((int)Time.time % updateSpeed == 0)
         {
             CheckParticleUpdate();
@@ -89,6 +92,6 @@ public class Floor : MonoBehaviour
 
     void FixedUpdate()
     {
-        ApplyForceToParticles();
+       // ApplyForceToParticles();
     }
 }

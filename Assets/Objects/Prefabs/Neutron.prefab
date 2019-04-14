@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3928086913587072132}
   - component: {fileID: 3928086913587072133}
   - component: {fileID: 3928086913587072142}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Neutron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2c97518ddf0a0c34a8396aa7b940ff83, type: 2}
+  - {fileID: 2100000, guid: 806603fc51ca1fb42b8c0f4367196365, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee43f15683fdbc49986f66cc68ce871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
 --- !u!114 &3928086913587072133
 MonoBehaviour:
   m_ObjectHideFlags: 0
