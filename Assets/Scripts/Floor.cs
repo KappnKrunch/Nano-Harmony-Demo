@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-    public float forceMutliplier = 0f;
-    public int updateSpeed = 3;
+    //public float forceMutliplier = 0f;
 
     //lists of all the particles and what they are
     public List<WeightsBiases> particles = new List<WeightsBiases>(); // set to private once finished debugging
     public List<Atom> atoms = new List<Atom>();
-
+    public Material floorMaterial;
+    public Material electronMaterial;
+    private Vector4[] origins = new Vector4[10];
 
     void CheckParticleUpdate()
     {
@@ -22,56 +23,50 @@ public class Floor : MonoBehaviour
 
     }
 
-    void ApplyForceToParticles()
+    void AnimateAtomRipples()
     {
-        //this function goes through the particles list and uses the weights and biases to apply force to earch of the particles
-        //it doesn't know what type each paticle is but it doesn't matter. It only needs the weights and biases to apply force to the rigidbody
-
-        //every particle in the list
-        for (int i = 0; i < particles.Count; i++)
+        for (int i = 0; i < atoms.Count; i++)
         {
-            Rigidbody mainParticle = particles[i].GetComponent<Rigidbody>(); //gets pulled on by every particle
-            Vector3 mainParticleForce = new Vector3(0,0,0);
-            int forced = 0; //how many particles are in range so that it can be averaged
-
-            //is going to effect every other particle in the list
-            for (int j = 0; j < particles.Count; j++)
+            if (atoms[i] != null)
             {
-                Rigidbody secondaryParticle = particles[i].GetComponent<Rigidbody>(); //gets pulled on by mainParticle
+                float distance = ((atoms[i].radius + 5) * (8.0f/9)) + ( (atoms[i].radius + 5) * Mathf.Sin(Time.fixedTime) * (1.0f/9) );
 
-                float distance = Vector3.Distance(mainParticle.position, secondaryParticle.position);
+                origins[i] = atoms[i].transform.position;
+                origins[i].w = distance;
+            }
+        }   
 
-                if (distance <= particles[i].GetMaxDistane() || distance <= particles[j].GetMaxDistane())
+        floorMaterial.SetInt("_PointsCount", atoms.Count);
+        floorMaterial.SetVectorArray("_Points", origins);
+
+        electronMaterial.SetInt("_PointsCount", atoms.Count);
+        electronMaterial.SetVectorArray("_Points", origins);
+    }
+
+    void CheckAtomsDistance() {
+        //checks each atoms distance from each other and if its too close 
+        //destroys the atom with the lesser mass
+
+        for (int i = 0; i < atoms.Count; i++) 
+        {
+            for (int j = 0; j < atoms.Count; j++) 
+            {
+                float minDistance = atoms[i].maxDistance - (atoms[j].maxDistance / 2);
+                if (Vector3.Distance(atoms[i].massCenter, atoms[j].massCenter) <= minDistance && atoms[i] != atoms[j]) 
                 {
-
-
-
-                    float inverseDistanceFromSecondary = Mathf.Clamp(particles[j].GetMaxDistane() - distance, 0, particles[j].GetMaxDistane());
-                    float inverseDistanceFromMain = Mathf.Clamp(particles[i].GetMaxDistane() - distance, 0, particles[i].GetMaxDistane() );
-
-
-                    mainParticleForce += ((secondaryParticle.position - mainParticle.position) *
-                                          particles[j].GetBias()[(int) particles[j].GetParticleType()]) -
-                                         (new Vector3(500,500,500) *particles[i].GetWeight()[(int) particles[i].GetParticleType()] )*
-                                         inverseDistanceFromSecondary;
+                    if (atoms[i].GetMass() > atoms[j].GetMass()) 
+                    {
+                        Destroy(atoms[j].gameObject);
+                        atoms.Remove(atoms[j]);
                         
-
-                    Vector3 secondaryParticleForce = ((secondaryParticle.position - mainParticle.position) *
-                                                      particles[i].GetBias()[(int)particles[i].GetParticleType()]) -
-                                                     (new Vector3(500, 500, 500) * particles[j].GetWeight()[(int)particles[j].GetParticleType()]) *
-                                                     inverseDistanceFromMain;
-
-                    secondaryParticleForce = secondaryParticleForce * forceMutliplier;
-
-                    secondaryParticle.AddForce(secondaryParticleForce );
-                    forced++;
+                    }
+                    else {
+                        Destroy(atoms[i].gameObject);
+                        atoms.Remove(atoms[i]);
+                        
+                    }
                 }
             }
-            //Debug.Log(mainParticleForce);
-            mainParticleForce = ( mainParticleForce / forced) * forceMutliplier;
-
-            mainParticle.AddForce( mainParticleForce); // how much the main particle is pulled / mow many particles there are
-
         }
     }
 
@@ -82,16 +77,14 @@ public class Floor : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log((int) Time.time % updateSpeed == 0);
-        if ((int)Time.time % updateSpeed == 0)
-        {
-            CheckParticleUpdate();
-            
-        }
+
+        CheckParticleUpdate();
     }
 
     void FixedUpdate()
     {
        // ApplyForceToParticles();
+       AnimateAtomRipples();
+       CheckAtomsDistance();
     }
 }

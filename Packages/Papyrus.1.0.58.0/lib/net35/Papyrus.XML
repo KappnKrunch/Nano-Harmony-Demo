@@ -1,0 +1,1192 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Papyrus</name>
+    </assembly>
+    <members>
+        <member name="T:Papyrus.ChildRecordAttribute">
+            <summary>
+            Register a record type as a child of this record class.
+            </summary>
+        </member>
+        <member name="P:Papyrus.ChildRecordAttribute.ChildType">
+            <summary>
+            Type of the child record
+            </summary>
+        </member>
+        <member name="P:Papyrus.ChildRecordAttribute.FieldNo">
+            <summary>
+            Field number to use for this child record
+            </summary>
+        </member>
+        <member name="T:Papyrus.RecordReference">
+            <summary>
+            Abstract base class for all RecordReferences
+            </summary>
+        </member>
+        <member name="F:Papyrus.RecordReference.DeserializationDatabase">
+            <summary>
+            Used when deserializing data pointers in save games to resolve the pointers.
+            </summary>
+        </member>
+        <member name="M:Papyrus.RecordReference.RecordReferencesInObject(System.Object)">
+            <summary>
+            Return a list of data pointers in the given object
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Papyrus.RecordReference.Database">
+            <summary>
+            Database containing the record this data pointer points too. Can be null if this is an empty pointer
+            or this pointer is not yet resolved.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference.Index">
+            <summary>
+            The index of the record in the source plugin
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference.Source">
+            <summary>
+            Name of the plugin this record is resolved from.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference.Plugin">
+            <summary>
+            Name of the plugin this record resides in. Can be different from Source if this
+            record is the result of an override from a plugin.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference.IsValid">
+            <summary>
+            True if this pointer has a valid value
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference.Record">
+            <summary>
+            The record this data pointer is pointing to
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference.RecordType">
+            <summary>
+            Type of record this data pointer points to
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference.IsEmpty">
+            <summary>
+            True if this is a "null" pointer
+            </summary>
+        </member>
+        <member name="T:Papyrus.RecordReference`1">
+            <summary>
+            A serialisable pointer to a record. Can be sent over a network or saved in a file and
+            resolved on deserialistion with a database.
+            </summary>
+            <typeparam name="T">Type of record to point to</typeparam>
+        </member>
+        <member name="M:Papyrus.RecordReference`1.op_Implicit(Papyrus.RecordReference{`0})~`0">
+            <summary>
+            Implicitly convert this data pointer into the value it represents
+            </summary>
+            <param name="recordReference">The data pointer to convert</param>
+            <returns>Value the data pointer represents</returns>
+        </member>
+        <member name="M:Papyrus.RecordReference`1.ResolveReference(Papyrus.RecordDatabase)">
+            <summary>
+            Resolves this data pointer using the given data object as the source
+            </summary>
+            <param name="database">The record database to use to resolve the reference.</param>
+        </member>
+        <member name="M:Papyrus.RecordReference`1.Equivalent(Papyrus.RecordReference{`0})">
+            <summary>
+            Returns true if this data pointer points to the same source and index as the other pointer.
+            </summary>
+            <param name="other">Pointer to compare too.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Papyrus.RecordReference`1.Empty">
+            <summary>
+            Returns an empty data pointer
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference`1.Database">
+            <summary>
+            Database this record is from. Can be null if this is a dangling pointer or not yet resolved.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference`1.Index">
+            <summary>
+            The index of the record in the source plugin
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference`1.Source">
+            <summary>
+            The plugin that the record is resolved from.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference`1.Plugin">
+            <summary>
+            The plugin that the record resides in. This can be different
+            from Source if a plugin has overriden the record.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference`1.RecordType">
+            <summary>
+            Type of record this pointer is pointing to
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordReference`1.Record">
+            <summary>
+            Record this data pointer is pointing to
+            </summary>
+        </member>
+        <member name="M:Papyrus.IRecordReferenceList.SetDatabase(Papyrus.RecordDatabase)">
+            <summary>
+            Internal method for setting database.
+            </summary>
+            <param name="database"></param>
+        </member>
+        <member name="T:Papyrus.RecordReferenceList`1">
+            <summary>
+            Bit of a hack to get editor handling of data recordReference lists easier.
+            </summary>
+            <typeparam name="T">Record type</typeparam>
+        </member>
+        <member name="M:Papyrus.RecordReferenceList`1.SetInternalList(System.Collections.Generic.List{Papyrus.RecordReference})">
+            <summary>
+            Editor method for modifying a collection of data pointers
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="P:Papyrus.RecordReferenceList`1.Records">
+            <summary>
+            Returns the internal list as a list of <c>RecordReference</c>
+            </summary>
+        </member>
+        <member name="T:Papyrus.DataTypes.AudioAsset">
+            <summary>
+            Wrapper for an audio asset
+            </summary>
+        </member>
+        <member name="F:Papyrus.ViewModel.EnableViewModel">
+            <summary>
+            Enables or disables PropertyChanged events
+            </summary>
+        </member>
+        <member name="M:Papyrus.ViewModel.RaisePropertyChanged(System.String)">
+            <summary>
+            raise property changed event
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.GetReference``1">
+            <summary>
+            Returns a reference to this record position.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.GetReference">
+            <summary>
+            Returns a pointer to this record position.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.ResolveDependencies(Papyrus.RecordDatabase)">
+            <summary>
+            Resolves any data pointer references in this record
+            </summary>
+            <param name="database"></param>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.GetDependencies">
+            <summary>
+            Gets a list of databases this record depends on
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.GetRecordReferences">
+            <summary>
+            Returns all the data pointers contained in this record.
+            <remarks>Do not call on a per-frame basis. Initialisation only!</remarks>
+            </summary>
+            <returns>List of data pointers contained in this record.</returns>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.GetRecordReferenceLists">
+            <summary>
+            Returns all the data pointer lists contained in this record.
+            </summary>
+            <returns>List of data pointer lists lists lists...</returns>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.GetResolvingLists">
+            <summary>
+            Returns all the data pointer lists contained in this record.
+            </summary>
+            <returns>List of data pointer lists lists lists...</returns>
+        </member>
+        <member name="M:Papyrus.DataTypes.Record.Equivalent(Papyrus.DataTypes.Record)">
+            <summary>
+            Returns true if the passed record is at the same place as this in a list
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Papyrus.DataTypes.Record.ID">
+            <summary>
+            This is the editor name for a data object.
+            </summary>
+        </member>
+        <member name="P:Papyrus.DataTypes.Record.ReadOnly">
+            <summary>
+            Is this object read only
+            </summary>
+        </member>
+        <member name="P:Papyrus.DataTypes.Record.Database">
+            <summary>
+            Reference to the database that this record resides in.
+            </summary>
+        </member>
+        <member name="P:Papyrus.DataTypes.Record.Container">
+            <summary>
+            Internal reference to the container for this record. Required for forming data pointers to this record
+            </summary>
+        </member>
+        <member name="M:Papyrus.Design.RecordReferenceUtils.ResolveReference(Papyrus.RecordReference,Papyrus.RecordDatabase,System.Boolean)">
+            <summary>
+            Resolves a given data pointer using the given database.
+            </summary>
+            <param name="reference"></param>
+            <param name="database"></param>
+            <param name="throwOnError">True to throw an exception if resolving the pointer throws an exception.</param>
+        </member>
+        <member name="M:Papyrus.Design.RecordReferenceUtils.GetInternalIndex(Papyrus.RecordReference)">
+            <summary>
+            Returns the internal index for a record reference. This us used for external network sync tools, using this locally is not advised.
+            </summary>
+            <returns>Internal index for record reference</returns>
+        </member>
+        <member name="T:Papyrus.Design.MutableRecordDatabase">
+            <summary>
+            Loads a database of plugins and then allows editing into a new
+            plugin file.
+            </summary>
+        </member>
+        <member name="T:Papyrus.RecordDatabase">
+            <summary>
+            A database of records.
+            </summary>
+        </member>
+        <member name="F:Papyrus.RecordDatabase._recordTypes">
+            <summary>
+            Record types, including abstract types
+            </summary>
+        </member>
+        <member name="F:Papyrus.RecordDatabase.ActiveModules">
+            <summary>
+            Modules currently loaded
+            </summary>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.Initialize(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initialize papyrus with the provided module assemblies
+            </summary>
+            <param name="moduleAssemblies">List of assemblies to load</param>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.#ctor">
+            <summary>
+            Creates an empty database.
+            </summary>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.#ctor(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Creates in instance of the record database from the given data files.
+            </summary>
+            <param name="dataFiles">An enumerable of the data files to load from.</param>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.GetRecordTypes">
+            <summary>
+            Returns a list of all record types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.LoadPlugins(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Takes a list of plugins and loads them into the database
+            </summary>
+            <param name="plugins"></param>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.LoadPlugin(System.String)">
+            <summary>
+            Loads a plugin from a file and returns the result
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.AddPlugin(Papyrus.RecordPlugin)">
+            <summary>
+            Adds the given plugin to the 
+            </summary>
+            <param name="plugin"></param>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.AddPlugins(System.Collections.Generic.IEnumerable{Papyrus.RecordPlugin})">
+            <summary>
+            Adds a range of plugins to the database.
+            </summary>
+            <param name="plugins"></param>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.RefreshRecordTable">
+            <summary>
+            Refreshes the database record table.
+            </summary>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.CacheRecordsOfType``1">
+            <summary>
+            Fetches the records of type T and returns them as a readonlycollection of type <c>Record</c>
+            </summary>
+            <typeparam name="T">A type decending from <c>Record</c></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.LoadModuleAssembly(System.String)">
+            <summary>
+            Loads a module assembly
+            </summary>
+            <param name="moduleName"></param>
+        </member>
+        <member name="M:Papyrus.RecordDatabase.LoadModule(Papyrus.PapyrusModuleAttribute)">
+            <summary>
+            Loads a module
+            </summary>
+            <param name="module"></param>
+        </member>
+        <member name="P:Papyrus.RecordDatabase.PluginCollection">
+            <summary>
+            The collection of records the current database is pulling from.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.#ctor(System.Collections.Generic.ICollection{System.String},System.String)">
+            <summary>
+            Creates a mutable database using the given files to populate the database and targetPlugin
+            as the target for any changes.
+            </summary>
+            <param name="files">array of file paths to plugins to populate the database.</param>
+            <param name="targetPlugin">File of the target plugin.</param>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.#ctor(System.String)">
+            <summary>
+            Creates a mutable record database using the given plugin name.
+            </summary>
+            <param name="pluginName">Name of the new plugin.</param>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.SaveActivePlugin">
+            <summary>
+            Saves the active plugin into its source file.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.GetEditableCopy(Papyrus.DataTypes.Record,System.Boolean)">
+            <summary>
+            Returns an editable copy of a record.
+            </summary>
+            <param name="record">The record to take an editable copy of</param>
+            <param name="replace">If true, will upon saving will replace the original record with this copy. False will create a new record.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.SaveRecord(Papyrus.DataTypes.Record)">
+            <summary>
+            Saves the record into the active plugin.
+            </summary>
+            <param name="record"></param>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.DeleteRecord(Papyrus.DataTypes.Record)">
+            <summary>
+            WARNING. This method can BREAK THINGS. Only delete a record if you are SURE it is not being used from any other
+            record.
+            </summary>
+            <param name="record"></param>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.NewRecord(System.Type)">
+            <summary>
+            Creates a new record in the plugin. Is not actually added until SaveRecord is called with this record.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Design.MutableRecordDatabase.NewRecord``1">
+            <summary>
+            Creates a new record in the plugin. Is not actually added until SaveRecord is called with this record.
+            </summary>
+            <typeparam name="T">Type of record</typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:Papyrus.Design.MutableRecordDatabase.ActivePlugin">
+            <summary>
+            Currently active plugin. Any changes being made to the database
+            are applied to this plugin.
+            </summary>
+        </member>
+        <member name="P:Papyrus.Design.MutableRecordDatabase.NeedsSaving">
+            <summary>
+            Boolean value indicating if this database has changes which need to be saved.
+            </summary>
+        </member>
+        <member name="T:Papyrus.Design.RecordExtensions">
+            <summary>
+            Some extension methods for records
+            </summary>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.RecordLocation(Papyrus.DataTypes.Record)">
+            <summary>
+            Returns the name of the plugin this record is sourced from
+            </summary>
+            <param name="record"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.RecordDestination(Papyrus.DataTypes.Record)">
+            <summary>
+            Returns the name of the plugin this record is placed. ie the plugin
+            that the record this record replaces resides in
+            </summary>
+            <param name="record"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.CanGetReference(Papyrus.DataTypes.Record)">
+            <summary>
+            Returns true if this record can be pointed to. Generally returns false if a record
+            has not been saved at least once.
+            </summary>
+            <param name="record"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.InActivePlugin(Papyrus.DataTypes.Record)">
+            <summary>
+            Returns true if this record is in the current active plugin (plugin being edited).
+            </summary>
+            <param name="record"></param>
+            <returns>True if record is located in the active plugin.</returns>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.BinaryEquals(Papyrus.DataTypes.Record,Papyrus.DataTypes.Record)">
+            <summary>
+            Serialises a record and compares the binary output to another record to detect
+            differences
+            </summary>
+            <param name="record"></param>
+            <param name="otherRecord"></param>
+            <returns>True if the records are the same</returns>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.JsonEquals(Papyrus.DataTypes.Record,Papyrus.DataTypes.Record)">
+            <summary>
+            Serialises a record and compares the json output to another record to detect
+            differences
+            </summary>
+            <param name="record"></param>
+            <param name="otherRecord"></param>
+            <returns>True if the records are the same</returns>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.GetEditableCopy(Papyrus.DataTypes.Record)">
+            <summary>
+            Returns an editable copy of a record
+            </summary>
+            <param name="record"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Design.RecordExtensions.SaveEditableCopy(Papyrus.DataTypes.Record)">
+            <summary>
+            Saves an editable record
+            </summary>
+            <param name="record"></param>
+        </member>
+        <member name="T:Papyrus.Exceptions.ReferenceException">
+            <summary>
+            Indicates an error while attempting to resolve a pointer
+            </summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.ReferenceException.#ctor">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.ReferenceException.#ctor(System.String)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.ReferenceException.#ctor(System.String,System.Exception)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="T:Papyrus.Exceptions.DependencyException">
+            <summary>
+            Indicates an error while attempting to resolve a dependency
+            </summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.DependencyException.#ctor">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.DependencyException.#ctor(System.String)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.DependencyException.#ctor(System.String,System.Exception)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="T:Papyrus.Exceptions.PluginLoadException">
+            <summary>
+            Indicates an error while attempting to resolve a pointer
+            </summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.PluginLoadException.#ctor">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.PluginLoadException.#ctor(System.String)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.PluginLoadException.#ctor(System.String,System.Exception)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="T:Papyrus.Exceptions.PluginSaveException">
+            <summary>
+            Indicates an error while attempting to resolve a pointer
+            </summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.PluginSaveException.#ctor">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.PluginSaveException.#ctor(System.String)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="M:Papyrus.Exceptions.PluginSaveException.#ctor(System.String,System.Exception)">
+            <summary>Creates a new ProtoException instance.</summary>
+        </member>
+        <member name="T:Papyrus.PluginInfo">
+            <summary>
+            A class describing a plugin.
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.Enabled">
+            <summary>
+            Is this plugin enabled or not.
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.IsValid">
+            <summary>
+            False if this plugin cannot be loaded for one reason or another.
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.Name">
+            <summary>
+            Name of this plugin
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.SourceFile">
+            <summary>
+            File this plugin is loaded from
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.Description">
+            <summary>
+            Description for this plugin
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.Author">
+            <summary>
+            Author of this plugin
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.LastModified">
+            <summary>
+            The time this plugin was last modified.
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.Dependencies">
+            <summary>
+            List of plugins this plugin depends on
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.IsActive">
+            <summary>
+            Used by the editor to determine if this plugin is currently
+            active.
+            </summary>
+        </member>
+        <member name="P:Papyrus.PluginInfo.Format">
+            <summary>
+            Data format this plugin is saved into
+            </summary>
+        </member>
+        <member name="M:Papyrus.PluginUtilities.PluginsInDirectory(System.String)">
+            <summary>
+            Gets a list of plugins the the given directory.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.PluginUtilities.CreateNewPlugin(System.String,System.String,Papyrus.Serialization.DataFormat)">
+            <summary>
+            Creates a new plugin with the given name in the given directory.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.PluginUtilities.ApplyPluginInfo(Papyrus.PluginInfo)">
+            <summary>
+            Opens a plugin and applies any changes to Author and Description
+            </summary>
+            <param name="pluginInfo"></param>
+        </member>
+        <member name="M:Papyrus.PluginUtilities.PluginFileTypes">
+            <summary>
+            Gets a list of file types for plugins.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.PluginUtilities.ConvertPlugin(Papyrus.PluginInfo,Papyrus.Serialization.DataFormat,System.String,System.Boolean)">
+            <summary>
+            Converts a plugin to a different format.
+            </summary>
+            <param name="pluginInfo">Plugin to convert</param>
+            <param name="newFormat">Format to convert to</param>
+            <param name="outputDirectory">Output directory for the new plugin.</param>
+            <param name="overwrite">True to overwrite an existing plugin if it exists.</param>
+        </member>
+        <member name="T:Papyrus.RecordAttribute">
+            <summary>
+            Marks a class as being a record
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordAttribute.ShowInEditor">
+            <summary>
+            Should this record type be shown in the editor record list.
+            </summary>
+        </member>
+        <member name="T:Papyrus.SubRecordAttribute">
+            <summary>
+            Marks a class as being a subrecord, which means it can be serialized
+            correctly inside a record.
+            </summary>
+        </member>
+        <member name="M:Papyrus.RecordContainerFactory.CreateReplaceContainerFromRecord(Papyrus.DataTypes.Record,Papyrus.RecordPlugin)">
+            <summary>
+            Creates a record container which will replace the given record when the given plugin is loaded.
+            </summary>
+            <param name="record"></param>
+            <param name="plugin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordContainerFactory.CreateReplaceContainerFromRecord``1(``0,Papyrus.RecordPlugin)">
+            <summary>
+            Creates a record container which will replace the given record when the given plugin is loaded.
+            </summary>
+            <param name="record"></param>
+            <param name="plugin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordContainerFactory.CreateNewRecordContainer(System.Type,Papyrus.RecordPlugin)">
+            <summary>
+            Creates a new record container which will be appended to the given plugin
+            </summary>
+            <param name="plugin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordContainerFactory.CreateNewRecordContainer``1(Papyrus.RecordPlugin)">
+            <summary>
+            Creates a new record container which will be appended to the given plugin
+            </summary>
+            <param name="plugin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordContainerFactory.Clone(Papyrus.IRecordContainer)">
+            <summary>
+            Clones a record container
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Papyrus.RecordPropertyAttribute">
+            <summary>
+            Marks a property to be saved with this record
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPropertyAttribute.FieldNumber">
+            <summary>
+            Field number to mark this property. Must be unique - do not change after it has been set.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPropertyAttribute.DynamicType">
+            <summary>
+            Mark this property as a dynamic type which will be resolved on deserialization
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPropertyAttribute.OverwriteList">
+            <summary>
+            True to overwrite a list with the deserialized items
+            </summary>
+        </member>
+        <member name="T:Papyrus.RecordType">
+            <summary>
+            Represents a record type
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordType.Type">
+            <summary>
+            Type object for the record
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordType.ShowInEditor">
+            <summary>
+            Should this record type be shown in the editor.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordType.Abstract">
+            <summary>
+            True if this record type cannot be instantiated.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Serialization.IDataSerializer.Serialize(Papyrus.RecordPlugin,System.String,System.Boolean)">
+            <summary>
+            Serializes the plugin into a file in the given directory.
+            </summary>
+            <param name="plugin">The plugin to serialize</param>
+            <param name="directory">Directory in which to serialize to</param>
+            <param name="overwrite">Overwrite an existing file if there is one</param>
+            <returns>A path to the created file.</returns>
+        </member>
+        <member name="M:Papyrus.Serialization.IDataSerializer.Deserialize(System.String)">
+            <summary>
+            Deserializes a plugin at the provided path.
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.IDataSerializer.ReadPluginHeader(System.String)">
+            <summary>
+            Reads only the header from the specified file
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.PiecemealSerializer.FileNameForContainer(Papyrus.IRecordContainer)">
+            <summary>
+            Returns a unique hash for a given container
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.PiecemealSerializer.SerializeRecordListInternal``1(Papyrus.RecordList{``0},System.String)">
+            <summary>
+            Serializes a record list into the directory
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="recordList"></param>
+            <param name="directory"></param>
+        </member>
+        <member name="M:Papyrus.Serialization.PiecemealSerializer.IterateRootDirectory(System.String,Papyrus.RecordPlugin)">
+            <summary>
+            Iterate the given directory, each directory inside is resolved to a data type and deserialized into a record list
+            </summary>
+            <param name="path">Path to deserialize</param>
+            <param name="plugin">plugin to deserialize into</param>
+        </member>
+        <member name="M:Papyrus.Serialization.PiecemealSerializer.DeserializeFiles(System.String[],System.Type)">
+            <summary>
+            Deserialize a list of files into a record list
+            </summary>
+            <param name="files">List of files to deserialize</param>
+            <param name="dataType">Data type to attempt to deserialize</param>
+            <returns>List of records deserialized</returns>
+        </member>
+        <member name="M:Papyrus.Serialization.PiecemealSerializer.ResolveDataType(System.String)">
+            <summary>
+            Finds a data type with the given string as its typename
+            </summary>
+            <param name="typeString"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Papyrus.IRecordContainer.Location">
+            <summary>
+            The plugin that this record is located in.
+            </summary>
+        </member>
+        <member name="P:Papyrus.IRecordContainer.Index">
+            <summary>
+            The index that this record is located at in the plugin.
+            </summary>
+        </member>
+        <member name="P:Papyrus.IRecordContainer.Destination">
+            <summary>
+            The plugin that this record will attempt to place itself at. Ignored when type is Append.
+            </summary>
+        </member>
+        <member name="T:Papyrus.RecordContainer`1">
+            <summary>
+            Contains a Record item and the instructions on how to merge it into the main database.
+            Keeps track of where a record came from and how to resolve a pointer back to it.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordContainer`1.Location">
+            <summary>
+            The plugin that this record is located in.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordContainer`1.Index">
+            <summary>
+            The index that this record is located at in the plugin.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordContainer`1.Destination">
+            <summary>
+            The plugin that this record will attempt to place itself at. Ignored when type is Append.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordContainer`1.Record">
+            <summary>
+            The record this container 'contains'.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordContainer`1.RecordType">
+            <summary>
+            The type of record this container contains
+            </summary>
+        </member>
+        <member name="T:Papyrus.PluginCollection">
+            <summary>
+            A collection of plugins which makes up a database. 
+            </summary>
+            <remarks>
+            Warning: Initialisation is destructive. After initialisation this collection
+            will no longer serialize to the same plugin files.
+            </remarks>
+        </member>
+        <member name="M:Papyrus.PluginCollection.SortDependencies(System.Collections.Generic.List{Papyrus.RecordPlugin})">
+            <summary>
+            Sorts a list of plugins so that dependencies are loaded before
+            plugins that depend on them.
+            </summary>
+            <param name="plugins"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.PluginCollection.SortDependencies(System.Collections.Generic.List{Papyrus.Serialization.PluginHeader})">
+            <summary>
+            Sorts a list of plugin headers so that dependencies are loaded before
+            plugins that depend on them.
+            </summary>
+            <param name="plugins"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Papyrus.RecordPlugin">
+            <summary>
+            A single plugin of records.
+            </summary>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.Apply(Papyrus.PluginCollection,Papyrus.RecordMode)">
+            <summary>
+            Applies the records in this plugin to the database
+            </summary>
+            <param name="database"></param>
+            <param name="mode"></param>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.GetDataTypes">
+            <summary>
+            Gets a list of data types this plugin contains
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.GetRecordList``1">
+            <summary>
+            Gets the record list with the given type. Ceeates the list if it does not exist.
+            </summary>
+            <typeparam name="T">A type decending from Record to fetch</typeparam>
+            <returns><c>RecordList</c> for the given type.</returns>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.GetDependencies">
+            <summary>
+            Gets a list of database names that this database depends on.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.AddRecord(Papyrus.IRecordContainer)">
+            <summary>
+            Adds a record to this plugin.
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.AddRecord``1(Papyrus.RecordContainer{``0})">
+            <summary>
+            Adds a record to this plugin.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="container"></param>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.RemoveRecord(Papyrus.IRecordContainer)">
+            <summary>
+            Removes a record from this plugin.
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.RemoveRecord``1(Papyrus.RecordContainer{``0})">
+            <summary>
+            Removes a record from this plugin.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="container"></param>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.GetRecordReferences">
+            <summary>
+            Gets a list of data pointers contained in this database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.RecordRecordReferenceLists">
+            <summary>
+            Gets a list of all the data pointer lists in this plugin.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.GetAllRecords">
+            <summary>
+            Gets a list of all the records in this plugin.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordPlugin.ResolveDependencies(Papyrus.RecordDatabase)">
+            <summary>
+            Resolves any data pointers contained in this database.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPlugin.Name">
+            <summary>
+            Name of this plugin. Used by other plugins to reference this plugin.
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPlugin.Description">
+            <summary>
+            Description for this plugin, often written by the author
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPlugin.Author">
+            <summary>
+            Author of the plugin
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPlugin.LastModified">
+            <summary>
+            Date this plugin was last modified
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPlugin.ModuleDependencies">
+            <summary>
+            Modules this plugin relies on to be loaded. (Normally defined per-game)
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordPlugin.SourceFile">
+            <summary>
+            The file this plugin was loaded from.
+            </summary>
+        </member>
+        <member name="M:Papyrus.RecordList`1.GetRecords">
+            <summary>
+            Returns a list of all the records in this list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordList`1.GetRecordReferences">
+            <summary>
+            Returns a list of data pointers that records in this list contain
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordList`1.GetDependencies">
+            <summary>
+            Gets a list of plugins that records in this list depend on
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.RecordList`1.GetRecordReferenceLists">
+            <summary>
+            Returns a list of data pointer lists in this record list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Papyrus.RecordList`1.RecordType">
+            <summary>
+            The underlying record type
+            </summary>
+        </member>
+        <member name="P:Papyrus.RecordList`1.Records">
+            <summary>
+            All the non-append records contained in this list.
+            </summary>
+        </member>
+        <member name="F:Papyrus.RecordMode.Append">
+            <summary>
+            Append to the end of the database list. Default behaviour
+            </summary>
+        </member>
+        <member name="F:Papyrus.RecordMode.Merge">
+            <summary>
+             Merge with the record at the location. Appends any list data from this item to the target record.
+            </summary>
+        </member>
+        <member name="F:Papyrus.RecordMode.Replace">
+            <summary>
+            Replace the record at the location.
+            </summary>
+        </member>
+        <member name="F:Papyrus.Serialization.JsonPiecemealSerializer.HeaderExtension">
+            <summary>
+            File extension for the header file
+            </summary>
+        </member>
+        <member name="F:Papyrus.Serialization.JsonPiecemealSerializer.ItemExtension">
+            <summary>
+            File extension for a single record
+            </summary>
+        </member>
+        <member name="M:Papyrus.Serialization.SerializationHelper.ResolveFromPath(System.String)">
+            <summary>
+            Returns an appropriate data serializer to load the file at the given path
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.SerializationHelper.ResolveFromDataFormat(Papyrus.Serialization.DataFormat)">
+            <summary>
+            From a given DataFormat returns a data serializer.
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.SerializationHelper.DataFormatFromPath(System.String)">
+            <summary>
+            Gets the data format from a given path
+            </summary>
+            <param name="path">Path of the plugin to get the data format from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.SerializationHelper.PluginsInDirectory(System.String)">
+            <summary>
+            Returns a list of plugins in the directory
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.SerializationHelper.PluginHeaderForPlugin(Papyrus.RecordPlugin)">
+            <summary>
+            Returns a plugin header for the given record plugin
+            </summary>
+            <param name="plugin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.SerializationHelper.RecordPluginForHeader(Papyrus.Serialization.PluginHeader)">
+            <summary>
+            Returns an empty record plugin for a given header
+            </summary>
+            <param name="header"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Papyrus.Serialization.Utilities.JsonUtilities.OverWrite(Papyrus.DataTypes.Record,Papyrus.DataTypes.Record)">
+            <summary>
+            Overwrite oldRecord with record
+            </summary>
+            <param name="oldRecord"></param>
+            <param name="record"></param>
+        </member>
+        <member name="M:Papyrus.Serialization.Utilities.ProtoBufUtils.ScanSubRecords(ProtoBuf.Meta.RuntimeTypeModel,System.Reflection.Assembly)">
+            <summary>
+            Scans an assembly and updates the type model with any SubRecords found
+            </summary>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:Papyrus.Serialization.Utilities.ProtoBufUtils.TagRecordClass(ProtoBuf.Meta.RuntimeTypeModel,System.Type)">
+            <summary>
+            Tags a class with 
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:Papyrus.Serialization.Utilities.ProtoBufUtils.OverWrite``1(``0,``0)">
+            <summary>
+            Overwrites record with the values from with.
+            </summary>
+        </member>
+        <member name="F:Papyrus.Config.IgnoreReferenceErrors">
+            <summary>
+            Set to true to ignore reference resolution errors
+            </summary>
+        </member>
+        <member name="F:Papyrus.Config.DefaultRecordDatabase">
+            <summary>
+            The default record database to use for new data pointers. (For use in the editor)
+            </summary>
+        </member>
+        <member name="F:Papyrus.Config.ReferenceErrorCallback">
+            <summary>
+            Method to call when a data pointer resolution error occurs. Return true from this callback
+            to resume loading
+            </summary>
+        </member>
+        <member name="T:Papyrus.Utilities.DependencySorter`1">
+            <summary>
+            Provides fast-algorithm and low-memory usage to sort objects based on their dependencies. 
+            </summary>
+            <remarks>
+            Definition: http://en.wikipedia.org/wiki/Topological_sorting
+            Source code credited to: http://tawani.blogspot.com/2009/02/topological-sorting-and-cyclic.html    
+            Original Java source code: http://www.java2s.com/Code/Java/Collections-Data-Structure/Topologicalsorting.htm
+            </remarks>
+            <author>ThangTran</author>
+            <history>
+            2012.03.21 - ThangTran: rewritten based on <see cref="!:TopologicalSorter"/>.
+            </history>
+        </member>
+        <member name="F:Papyrus.Utilities.DependencySorter`1._matrix">
+            <summary>
+            Gets the dependency matrix used by this instance.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Utilities.DependencySorter`1.AddObjects(`0[])">
+            <summary>
+            Adds a list of objects that will be sorted.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Utilities.DependencySorter`1.SetDependencies(`0,`0[])">
+            <summary>
+            Sets dependencies of given object.
+            This means <paramref name="obj"/> depends on these <paramref name="dependsOnObjects"/> to run.
+            Please make sure objects given in the <paramref name="obj"/> and <paramref name="dependsOnObjects"/> are added first.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Utilities.DependencySorter`1.Sort">
+            <summary>
+            Sorts objects based on this dependencies.
+            Note: because of the nature of algorithm and memory usage efficiency, this method can be used only one time.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Utilities.DependencySorter`1.GetIndependentObject(`0@)">
+            <summary>
+            Returns independent object or returns NULL if no independent object is found.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Utilities.DependencySorter`1.DeleteObject(`0)">
+            <summary>
+            Deletes given object from the matrix.
+            </summary>
+        </member>
+        <member name="T:Papyrus.Utilities.CircularReferenceException">
+            <summary>
+            Represents a circular reference exception when sorting dependency objects.
+            </summary>
+        </member>
+        <member name="M:Papyrus.Utilities.CircularReferenceException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Papyrus.Utilities.CircularReferenceException"/> class.
+            </summary>
+        </member>
+        <member name="T:Papyrus.ObjectCopier">
+            <summary>
+            Reference Article http://www.codeproject.com/KB/tips/SerializedObjectCloner.aspx
+            
+            Provides a method for performing a deep copy of an object.
+            Binary Serialization is used to perform the copy.
+            </summary>
+        </member>
+        <member name="M:Papyrus.ObjectCopier.Clone``1(``0)">
+            <summary>
+            Perform a deep Copy of the object.
+            </summary>
+            <typeparam name="T">The type of object being copied.</typeparam>
+            <param name="source">The object instance to copy.</param>
+            <returns>The copied object.</returns>
+        </member>
+    </members>
+</doc>
