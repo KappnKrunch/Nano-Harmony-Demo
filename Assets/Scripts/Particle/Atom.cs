@@ -13,7 +13,7 @@ public class Atom : MonoBehaviour
     public float timeMultiplier = 1;
     public float mass = 0;
     [Range(0, 8)] public int octaves;
-    [Range(0, 10)] public float noise;
+    [Range(0, 10)] public float noiseRange;
     public Vector2 ratio = new Vector2(0,0);
     public Vector3 massCenter;
     public Vector3 rotationOffset = new Vector3(0,0,0);
@@ -113,7 +113,7 @@ public class Atom : MonoBehaviour
 
                     offset = rotation * offset;
 
-                    force = (this.transform.position - particle.position + offset) * particle.mass * inverseDistance * atomBias[(int)particles[i].type] * 10;//10 is a stability factor
+                    force = (this.transform.position - particle.position + offset) * particle.mass * inverseDistance * atomBias[(int)particles[i].type] * mass;//10 is a stability factor
                     electronIndex++; //cycle through the electrons
                 }
                 else 
@@ -164,12 +164,13 @@ public class Atom : MonoBehaviour
         atomSounds.frequency1 = (int)atomCount[0] % 12;
         atomSounds.frequency2 = (int)atomCount[1] % 12;
         atomSounds.octaves = 1 + (int) (mass / 50);
-        atomSounds.noise = UnityEngine.Random.Range(-noise / 10, noise / 10);
+        atomSounds.noise = UnityEngine.Random.Range(-noiseRange / 10, noiseRange / 10);
+       
     }
 
     void Start()
     {
-        floor = mainFloor.GetComponent<Floor>();
+        floor = GameObject.FindGameObjectWithTag("floor").GetComponent<Floor>();
         particles.Clear();
         atomSounds = this.GetComponent<SinewaveExample>();
     }
@@ -179,6 +180,8 @@ public class Atom : MonoBehaviour
         FindParticlesNearAtom();
         DestroyAtomButton();
         UpdateAtomSounds();
+
+
     }
 
     void FixedUpdate()

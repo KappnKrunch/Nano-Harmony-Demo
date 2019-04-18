@@ -14,6 +14,13 @@ public class Floor : MonoBehaviour
     public Material electronMaterial;
     private Vector4[] origins = new Vector4[10];
 
+    //for spawning the particles
+    public GameObject player;
+    public GameObject electronPrefab;
+    public GameObject protonPrefab;
+    public GameObject neutronPrefab;
+    public GameObject atomPrefab;
+
     void CheckParticleUpdate()
     {
         //looks for any particles and sets the list to those particles
@@ -70,15 +77,57 @@ public class Floor : MonoBehaviour
         }
     }
 
+    void SpawnParticle()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 100))
+            {
+                Instantiate(protonPrefab, hit.point, Quaternion.identity);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 100))
+            {
+                Instantiate(neutronPrefab, hit.point, Quaternion.identity);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 100))
+            {
+                Instantiate(electronPrefab, hit.point, Quaternion.identity);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, 100))
+            {
+                Instantiate(atomPrefab, hit.point, Quaternion.identity);
+
+            }
+        }
+    }
+
     void Start()
     {
         particles.Clear();
+        print("spawn particles with (t) (y) (u) (p) keys");
     }
 
     void Update()
     {
 
         CheckParticleUpdate();
+        SpawnParticle();
     }
 
     void FixedUpdate()

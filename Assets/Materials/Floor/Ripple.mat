@@ -76,7 +76,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PointsCoint: 0
-    - _PointsCount: 2
+    - _PointsCount: 3
     - _RippleBrightness: 1
     - _RippleDistance: 1.9918532
     - _RippleDistince: 11.34

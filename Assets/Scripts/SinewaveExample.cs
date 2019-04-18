@@ -27,18 +27,6 @@ public class SinewaveExample : MonoBehaviour {
         audioSource.Play(); //avoids audiosource from starting to play automatically
     }
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if (!audioSource.isPlaying) {
-                timeIndex = 0;  //resets timer before playing sound
-                audioSource.Play();
-            }
-            else {
-                audioSource.Stop();
-            }
-        }
-    }
-
     void OnAudioFilterRead(float[] data, int channels) {
         for (int i = 0; i < data.Length; i += channels) {
             data[i] = CreateSine(timeIndex, Mathf.Pow(1.059463f, frequency1) * 261.6f /2, sampleRate);
@@ -63,7 +51,7 @@ public class SinewaveExample : MonoBehaviour {
         for (int i = 0; i < octaves; i++)
         {
             
-            total += Mathf.Sin( Mathf.Pow(2,i+1) * Mathf.PI * timeIndex * frequency / sampleRate ) / Mathf.Pow(i,i) + noise;
+            total += Mathf.Sin( Mathf.Pow(2,i+1) * Mathf.PI * timeIndex * frequency / sampleRate ) / Mathf.Pow(i,i) + noise; 
         }
 
         return total;

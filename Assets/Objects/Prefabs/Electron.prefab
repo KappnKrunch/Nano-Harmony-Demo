@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4520703751058166450}
   m_Layer: 9
   m_Name: Electron
-  m_TagString: Untagged
+  m_TagString: electron
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
